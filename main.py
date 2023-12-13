@@ -1,6 +1,8 @@
 from tkinter import *
 from tkinter import messagebox
 from PIL import ImageTk
+from create_account import Account
+from action_page import Encrypt_Decrypt
 
 
 def login():
@@ -20,13 +22,13 @@ def login():
         messagebox.showerror("Error", 'fields cannot be empty')
     elif usernameEntry.get() == user_name and passwordEntry.get() == password:
         window.destroy()
-        import action_page
+        action = Encrypt_Decrypt()
     else:
         messagebox.showerror('Error', 'Please enter correct credentials')
 
 
 def signup():
-    import create_account
+    Account()
 
 
 # Main Window

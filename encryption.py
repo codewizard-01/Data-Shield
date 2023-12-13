@@ -1,19 +1,13 @@
-from tkinter import filedialog
 
+class ProcessEncryption:
+    def __init__(self, filename, key):
+        self.file = open(filename, "rb")
+        self.data = self.file.read()
+        self.file.close()
+        self.data = bytearray(self.data)
+        for index, value in enumerate(self.data):
+            self.data[index] = value ^ key
 
-def encrypt_decrypt(filename, key):
-    file = open(filename, "rb")
-    data = file.read()
-    file.close()
-
-    data = bytearray(data)
-    for index, value in enumerate(data):
-        data[index] = value ^ key
-
-    file = open(filename, "wb")
-    file.write(data)
-    file.close()
-
-
-filename = filedialog.askopenfilename()
-encrypt_decrypt(filename, key = 25)
+        self.file = open(filename, "wb")
+        self.file.write(self.data)
+        self.file.close()
