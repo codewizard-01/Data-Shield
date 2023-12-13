@@ -1,7 +1,7 @@
 from tkinter import filedialog
 
 
-def encrypt(filename, key):
+def encrypt_decrypt(filename, key):
     file = open(filename, "rb")
     data = file.read()
     file.close()
@@ -16,4 +16,4 @@ def encrypt(filename, key):
 
 
 filename = filedialog.askopenfilename()
-encrypt(filename, key = 25)
+encrypt_decrypt(filename, key = 25)

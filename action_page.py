@@ -9,11 +9,8 @@ window.resizable(False, False)
 
 
 # Encryption and Decryption of the file
-def Encrypt():
-    import encrypt
-
-def Decrypt():
-    import decrypt
+def encrypt_decrypt():
+    import encryption
 
 
 # Background Photo
@@ -21,8 +18,7 @@ backgroundImage = ImageTk.PhotoImage(file="Images/bg.jpg")
 bg_label = Label(window, image=backgroundImage)
 bg_label.place(x=0, y=0)
 
-# Login Frame
-loginFrame = Frame(window,bg="white", width=700, height=700, bd=10)
+loginFrame = Frame(window, bg="white", width=700, height=700, bd=10)
 loginFrame.place(x=450, y=200)
 
 # Background Image of the frame
@@ -40,11 +36,11 @@ label_next = Label(loginFrame, text="")
 label_next.pack(pady=15)
 
 # Encrypt Button
-encrypt_button = Button(loginFrame, text="Encrypt", bg="green", padx=30, pady=5, bd=5, command=Encrypt)
+encrypt_button = Button(loginFrame, text="Encrypt", bg="green", padx=30, pady=5, bd=5, command=encrypt_decrypt)
 encrypt_button.pack(pady=10, padx=135)
 
 # Decrypt Button
-decrypt_button = Button(loginFrame, text="Decrypt", bg="red", padx=30, pady=5, bd=5, command=Decrypt)
+decrypt_button = Button(loginFrame, text="Decrypt", bg="red", padx=30, pady=5, bd=5, command=encrypt_decrypt)
 decrypt_button.pack(pady=5)
 
 # This label is for creating a space between two widgets
