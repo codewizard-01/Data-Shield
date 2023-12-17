@@ -4,12 +4,13 @@ from tkinter import filedialog
 from encryption import ProcessEncryption
 
 
-class Encrypt_Decrypt:
+class EncryptDecrypt:
 
     def __init__(self):
         # The main window
         self.window = Tk()
         self.window.geometry('1280x700+100+80')
+        self.window.title("Data Shield")
         self.window.resizable(False, False)
 
         # Background Photo
@@ -22,12 +23,16 @@ class Encrypt_Decrypt:
 
         # Background Image of the frame
         self.frame_bg = ImageTk.PhotoImage(file="Images/login.png")
-        self.label_img = Label(self.loginFrame, image=self.frame_bg)
+        self.label_img = Label(self.loginFrame, image=self.frame_bg, highlightthickness=0, bg="white")
         self.label_img.place(x=0, y=0)
+
+        # Go Back
+        self.go_back = Button(self.window, text="←", padx=25,  command=self.go_back)
+        self.go_back.place(x=0, y=0)
 
         # The image of the lock on the top of the frame
         self.logo = PhotoImage(file="Images/password.png")
-        self.logo_ = Label(self.loginFrame, image=self.logo)
+        self.logo_ = Label(self.loginFrame, image=self.logo, highlightthickness=0, bg="#cce5ff")
         self.logo_.pack(pady=30)
 
         # This is for creating a space between the two widgets
@@ -40,7 +45,8 @@ class Encrypt_Decrypt:
         self.encrypt_button.pack(pady=10, padx=135)
 
         # Decrypt Button
-        self.decrypt_button = Button(self.loginFrame, text="Decrypt", bg="red", padx=30, pady=5, bd=5, command=self.encrypt_decrypt)
+        self.decrypt_button = Button(self.loginFrame, text="Decrypt", bg="red", padx=30, pady=5, bd=5,
+                                     command=self.encrypt_decrypt)
         self.decrypt_button.pack(pady=5)
 
         # This label is for creating a space between two widgets
@@ -53,7 +59,5 @@ class Encrypt_Decrypt:
         filename = filedialog.askopenfilename()
         ProcessEncryption(filename, key=25)
 
-
-
-
-
+    def go_back(self):
+        pass

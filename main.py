@@ -2,78 +2,90 @@ from tkinter import *
 from tkinter import messagebox
 from PIL import ImageTk
 from create_account import Account
-from action_page import Encrypt_Decrypt
+from action_page import EncryptDecrypt
+from change_credentials import ChangeUserPass
+import sqlite3
 
 
-def login():
-    filename = open("metadata.txt", "r")
+class MainPage:
 
-    # List for keeping the username and password
-    metadata = []
-    data = filename.readline()
-    while data != "":
-        metadata.append(data.strip("\n"))
-        data = filename.readline()
+    def __init__(self):
+        # Main Window
+        self.window = Tk()
+        self.window.geometry('1280x700+100+80')
+        self.window.title("Data Shield")
+        self.window.resizable(False, False)
 
-    user_name = metadata[0]
-    password = metadata[1]
+        # Background Image
+        self.background_image = ImageTk.PhotoImage(file="Images/bg.jpg")
+        self.bg_label = Label(self.window, image=self.background_image)
+        self.bg_label.place(x=0, y=0)
 
-    if usernameEntry.get() == '' or passwordEntry.get() == '':
-        messagebox.showerror("Error", 'fields cannot be empty')
-    elif usernameEntry.get() == user_name and passwordEntry.get() == password:
-        window.destroy()
-        action = Encrypt_Decrypt()
-    else:
-        messagebox.showerror('Error', 'Please enter correct credentials')
+        self.loginFrame = Frame(self.window, bg='white')
+        self.loginFrame.place(x=400, y=150)
+
+        # The first image at the top of the framec
+        self.logoImage = PhotoImage(file='Images/student.png')
+        self.logo_label = Label(self.loginFrame, image=self.logoImage, bg="white")
+        self.logo_label.grid(row=0, column=1)
+
+        # The image for the username label
+        self.UsernameImage = PhotoImage(file='Images/user.png')
+        self.Username_label = Label(self.loginFrame, image=self.UsernameImage, text='Username', compound=LEFT,
+                                    font=('Sans-serif', 20, 'bold'), bg='white')
+        self.Username_label.grid(row=1, column=0)
+
+        # The image for the password label
+        self.passwordImage = PhotoImage(file='Images/password.png')
+        self.password_label = Label(self.loginFrame, image=self.passwordImage, text='Password', compound=LEFT,
+                                    font=('Sans-serif', 20, 'bold'), bg='white')
+        self.password_label.grid(row=2, column=0)
+
+        # Entries
+        self.usernameEntry = Entry(self.loginFrame, font=('Times New Roman', 20, 'normal'), bd=5)
+        self.usernameEntry.grid(row=1, column=1, pady=10, padx=20)
+        self.passwordEntry = Entry(self.loginFrame, font=('Times New Roman', 20, 'normal'), bd=5, show="•")
+        self.passwordEntry.grid(row=2, column=1, pady=10, padx=20)
+
+        # Buttons
+        self.loginButton = Button(self.loginFrame, text="Login", font=('Sans-serif', 14, 'bold'), width=15,
+                                  fg='white', bg='cornflowerblue', activebackground='green', activeforeground='white',
+                                  cursor='hand2', command=self.login)
+        self.loginButton.grid(row=3, column=1)
+        self.signup_button = Button(self.loginFrame, text="Don't have account?", padx=36, activebackground='green',
+                                    cursor='hand2', command=self.signup)
+        self.signup_button.grid(row=4, column=1, pady=10)
+        self.change_user_pass = Button(self.loginFrame, text="Change Password", padx=42, activebackground="red",
+                                       cursor="hand2", command=self.change_credential)
+        self.change_user_pass.grid(row=5, column=1)
+
+        self.window.mainloop()
+
+    def login(self):
+
+        # Connect to database
+        conn = sqlite3.connect("users.db")
+        cur = conn.cursor()
+        cur.execute('''SELECT * FROM Users''')
+        result = cur.fetchone()
+        user_name = result[0]
+        password = result[1]
+        conn.close()
+
+        # Password and username validation check
+        if self.usernameEntry.get() == '' or self.passwordEntry.get() == '':
+            messagebox.showerror("Error", 'fields cannot be empty')
+        elif self.usernameEntry.get() == user_name and self.passwordEntry.get() == password:
+            self.window.destroy()
+            EncryptDecrypt()
+        else:
+            messagebox.showerror('Error', 'Please enter correct credentials')
+
+    def signup(self):
+        Account()
+
+    def change_credential(self):
+        ChangeUserPass()
 
 
-def signup():
-    Account()
-
-
-# Main Window
-window = Tk()
-window.geometry('1280x700+100+80')
-window.resizable(False, False)
-
-# Background Image
-background_image = ImageTk.PhotoImage(file="Images/bg.jpg")
-bg_label = Label(window, image=background_image)
-bg_label.place(x=0, y=0)
-
-loginFrame = Frame(window, bg='white')
-loginFrame.place(x=400, y=150)
-
-# The first image at the top of the frame
-logoImage = PhotoImage(file='Images/student.png')
-logo_label = Label(loginFrame, image=logoImage)
-logo_label.grid(row=0, column=1)
-
-# The image for the username label
-UsernameImage = PhotoImage(file='Images/user.png')
-Username_label = Label(loginFrame, image=UsernameImage, text='Username', compound=LEFT,
-                       font=('times new roman', 20, 'bold'), bg='white')
-Username_label.grid(row=1, column=0)
-
-# The image for the password label
-passwordImage = PhotoImage(file='Images/password.png')
-password_label = Label(loginFrame, image=passwordImage, text='password', compound=LEFT,
-                       font=('times new roman', 20, 'bold'), bg='white')
-password_label.grid(row=2, column=0)
-
-# Entries
-usernameEntry = Entry(loginFrame, font=('times new roman', 20, 'bold'), bd=5)
-usernameEntry.grid(row=1, column=1, pady=10, padx=20)
-passwordEntry = Entry(loginFrame, font=('times new roman', 20, 'bold'), bd=5, show="•")
-passwordEntry.grid(row=2, column=1, pady=10, padx=20)
-
-# Buttons
-loginButton = Button(loginFrame, text="Login", font=('times new roman', 14, 'bold'), width=15, fg='white',
-                bg='cornflowerblue', activebackground='green', activeforeground='white', cursor='hand2', command=login)
-loginButton.grid(row=3, column=1)
-signup_button = Button(loginFrame, text="Don't have account?", padx=29, activebackground='green',
-                       activeforeground='white', cursor='hand2', command=signup)
-signup_button.grid(row=4, column=1, pady=10)
-
-
-window.mainloop()
+show_main_page = MainPage()
