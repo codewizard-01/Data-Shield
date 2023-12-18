@@ -19,10 +19,14 @@ Data-Shield is an application for keeping your data safe. It has the ability to 
 Data Shield allows you to have a unique account with a username and password for using the application. If you haven't already made an account, you create one for yourself. Then with that you are able to encrypt and decrypt any kind of files and folders. Besides, There is
 an option that let you to change your password password and username. So, in case you want to change them, you can do that.
 
-It is still under development. So keep an eye on newer updates which surely will have more capabilities and features that will make its use
+# Where are we? 
+
+Data Shield is still under development. So keep an eye on newer updates which surely will have more capabilities and features that will make its use
 exciting for you. Moreover, For making it even better and nicer, don't hesitate to let me know your nice ideas and comments. If you found bugs and things that needed to be developed, inform me so that we can solve it together.
 
 I hope you have fun using it.
 
-Cheers,
-Esmatullah Hadi [Codewizard-01]
+# Creator 
+Esmatullah Hadi [codewizard-0]
+
+
