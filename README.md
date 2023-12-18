@@ -27,6 +27,6 @@ exciting for you. Moreover, For making it even better and nicer, don't hesitate 
 I hope you have fun using it.
 
 # Creator 
-Esmatullah Hadi [@codewizard-01]
+Esmatullah Hadi [codewizard-01]
 
 
