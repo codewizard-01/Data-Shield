@@ -46,6 +46,6 @@ python3 main.py
 ## 📩 Contact
 Have questions or suggestions? Reach out to me:
 
-- LinkedIn 🔗: [LinkedIn](https://www.linkedin.com/in/esmatullah-hadi-121862234/)
-- Email ✉️: [Gmail](mailto:esmatullahahdi@gmail.com)
+- LinkedIn 🔗: [Esmatullah Hadi](https://www.linkedin.com/in/esmatullah-hadi-121862234/)
+- Email ✉️: [esmatullahahdi@gmail.com](mailto:esmatullahahdi@gmail.com)
 - GitHub: [codewizard-01](https://github.com/codewizard-01)  
